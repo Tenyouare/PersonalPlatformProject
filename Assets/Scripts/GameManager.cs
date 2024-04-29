@@ -8,14 +8,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject platformPrefab;
-    [SerializeField] BoxCollider platformPrefabBox;
-    [SerializeField] List<GameObject> platformList;
+    [SerializeField] bool  camLock;
     private Vector3 offset;
 
-
-    private CharacterMovement CharacterMovementScript;
     [SerializeField] GameObject player;
-    Vector3 platformVector;
+    [SerializeField] Vector3 platformVector;
+
+    private Vector3 _currentVel = Vector3.zero;
+    [SerializeField] float smoothTime = 0.25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
 
         offset = new Vector3(0, 0.25f, -15f);
-        CharacterMovementScript = GameObject.Find("Player").GetComponent<CharacterMovement>();
         platformVector = new Vector3(0, 9, 0);
         StartCoroutine(RepeatGenerateFunction());
     }
@@ -32,12 +31,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        mainCamera.transform.Translate(Vector3.up * 0.3f * Time.deltaTime);
-        CalculateList();
+        if (camLock== false) 
+        {
+            Debug.Log("false");
+        }
+        else if (camLock== true) 
+        { 
+            Debug.Log("true"); 
+        }
+
     }
+
     private void LateUpdate()
     {
+        if (camLock == false)
+        {
+            mainCamera.transform.Translate(Vector3.up * 0.5f * Time.deltaTime);
+        }
         CameraSetting();
     }
 
@@ -45,11 +55,24 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y > mainCamera.transform.position.y)
         {
+            camLock = true;
             Vector3 _cameraPos = mainCamera.transform.position;
             Vector3 _newPos = player.transform.position + offset;
-            mainCamera.transform.position = new Vector3(_cameraPos.x, _newPos.y, _cameraPos.z);
-            //mainCamera.transform.position = player.transform.position + offset;
+            Vector3 _targetPosition = new Vector3(_cameraPos.x, _newPos.y, _cameraPos.z);
+
+            //Old camera follow code, does not work properly
+            //mainCamera.transform.position = new Vector3(_cameraPos.x, _newPos.y, _cameraPos.z);
+
+            //new camera follow code, works more smoothly
+            mainCamera.transform.position = Vector3.SmoothDamp(_cameraPos, _targetPosition,
+                ref _currentVel, smoothTime);
+
         }
+        else
+        {
+            camLock = false;
+        }
+
     }
     IEnumerator RepeatGenerateFunction()
     {
@@ -65,25 +88,5 @@ public class GameManager : MonoBehaviour
         Instantiate(platformPrefab, platformVector, platformPrefab.transform.rotation);
         platformVector += new Vector3(0, 3, 0);
         platformPrefab.transform.position = platformVector;
-        platformList.Add(platformPrefab);
     }
-
-    void CalculateList()
-    {
-        foreach (GameObject platformPrefab in platformList)
-        {
-            platformPrefabBox = platformPrefab.GetComponent<BoxCollider>();
-            if (platformPrefab.transform.position.y > player.transform.position.y)
-            {
-                platformPrefabBox.isTrigger = true;
-
-            }
-            else if (platformPrefab.transform.position.y <= transform.position.y + 0.5f)
-            {
-                platformPrefabBox.isTrigger = false;
-            }
-        }
-    }
-
-
 }

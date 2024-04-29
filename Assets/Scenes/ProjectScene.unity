@@ -480,9 +480,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1426073256}
   platformPrefab: {fileID: 1072352784739465468, guid: aa408124467da6e47975fbedf8956f74, type: 3}
-  platformPrefabBox: {fileID: 0}
-  platformList: []
+  camLock: 0
   player: {fileID: 0}
+  platformVector: {x: 0, y: 0, z: 0}
+  smoothTime: 0.25
 --- !u!1001 &1067833058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -685,7 +686,7 @@ GameObject:
   - component: {fileID: 2145107476}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -835,7 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalPosition.y

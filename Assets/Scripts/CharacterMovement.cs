@@ -33,9 +33,6 @@ public class CharacterMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
-
-
-        //PositionChecker();
         PlayerJumpCheck();
     }
 
@@ -57,25 +54,6 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    void PositionChecker()
-    {
-        platform = GameObject.Find("Platform");
-        platforms.Add(platform);
 
-        foreach (GameObject platform in platforms)
-        {
-            platformCol = platform.GetComponent<BoxCollider>();
-
-            if (platform.transform.position.y > transform.position.y)
-            {
-                platformCol.isTrigger = true;
-
-            }
-            else if (platform.transform.position.y <= transform.position.y + 0.5f)
-            {
-                platformCol.isTrigger = false;
-            }
-        }
-    }
 
 }
