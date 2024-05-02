@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
         offset = new Vector3(0, 0.25f, -15f);
         platformVector = new Vector3(0, 9, 0);
-        StartCoroutine(RepeatGenerateFunction());
+        //StartCoroutine(RepeatGenerateFunction());
     }
 
     // Update is called once per frame
