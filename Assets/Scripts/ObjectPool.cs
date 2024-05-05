@@ -31,10 +31,6 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
 
 
     public GameObject GetObjectFromPool()
@@ -47,12 +43,15 @@ public class ObjectPool : MonoBehaviour
                 obj.transform.position = PrefHeight();
                 obj.SetActive(true);
                 return obj;
+
             }
         }
-        GameObject newObj = Instantiate(prefab);
+        /*GameObject newObj = Instantiate(prefab);
         pooledObjects.Add(newObj);
         newObj.transform.position = PrefHeight();
-        return newObj;
+        return newObj;*/
+        return null;
+
     }
 
     public Vector3 PrefHeight()
@@ -69,15 +68,19 @@ public class ObjectPool : MonoBehaviour
         return platformVector;
     }
 
-    public void ReturnObjectToPool()
+    public GameObject ReturnObjectToPool()
     {
         foreach(var obj in pooledObjects)
         {
-            if(player.transform.position.y > obj.transform.position.y)
+            if(player.transform.position.y > obj.transform.position.y + 10)
             {
                 obj.SetActive(false);
+                return obj;
             }
         }
+        return null;
     }
+
+
 
 }

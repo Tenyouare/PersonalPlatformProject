@@ -9,26 +9,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject platformPrefab;
     [SerializeField] bool  camLock;
-    private Vector3 offset;
+    private Vector3 camOffset;
 
     [SerializeField] GameObject player;
-    [SerializeField] Vector3 platformVector;
+
 
     private Vector3 _currentVel = Vector3.zero;
     [SerializeField] float smoothTime = 0.25f;
-    // Start is called before the first frame update
+
     void Start()
     {
         mainCamera = Camera.main;
         player = GameObject.Find("Player");
 
+        camOffset = new Vector3(0, 0.25f, -15f);
 
-        offset = new Vector3(0, 0.25f, -15f);
-        platformVector = new Vector3(0, 9, 0);
-        //StartCoroutine(RepeatGenerateFunction());
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (camLock== false) 
@@ -53,11 +51,11 @@ public class GameManager : MonoBehaviour
 
     void CameraSetting()
     {
-        if (player.transform.position.y > mainCamera.transform.position.y)
+        if (player.transform.position.y > mainCamera.transform.position.y+2.5f)
         {
             camLock = true;
             Vector3 _cameraPos = mainCamera.transform.position;
-            Vector3 _newPos = player.transform.position + offset;
+            Vector3 _newPos = player.transform.position + camOffset;
             Vector3 _targetPosition = new Vector3(_cameraPos.x, _newPos.y, _cameraPos.z);
 
             //Old camera follow code, does not work properly
@@ -74,19 +72,5 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    IEnumerator RepeatGenerateFunction()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(2f);
-            PrefabGenerate();
-        }
-    }
 
-    void PrefabGenerate()
-    {
-        Instantiate(platformPrefab, platformVector, platformPrefab.transform.rotation);
-        platformVector += new Vector3(0, 3, 0);
-        platformPrefab.transform.position = platformVector;
-    }
 }

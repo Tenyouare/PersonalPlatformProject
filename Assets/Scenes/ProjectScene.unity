@@ -479,10 +479,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1426073256}
-  platformPrefab: {fileID: 1072352784739465468, guid: aa408124467da6e47975fbedf8956f74, type: 3}
+  platformPrefab: {fileID: 0}
   camLock: 0
   player: {fileID: 0}
-  platformVector: {x: 0, y: 0, z: 0}
   smoothTime: 0.25
 --- !u!1 &924336543
 GameObject:
@@ -514,8 +513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
-  poolSize: 5
-  prefab: {fileID: 8571916163549862473, guid: 4084789ed1de1794aaec928a329079b4, type: 3}
+  poolSize: 20
+  prefab: {fileID: 1072352784739465468, guid: aa408124467da6e47975fbedf8956f74, type: 3}
   platformVector: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
   player: {fileID: 2145107469}
@@ -552,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.43
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -640,7 +639,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPool: {fileID: 924336544}
-  spawnInterval: 5
+  spawnInterval: 1
+  returnInterval: 1
 --- !u!1 &1369055202
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.93
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -969,6 +969,10 @@ PrefabInstance:
     - target: {fileID: 2391406916440764680, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969738144571382510, guid: aa408124467da6e47975fbedf8956f74, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6969738144571382510, guid: aa408124467da6e47975fbedf8956f74, type: 3}
       propertyPath: m_IsKinematic
