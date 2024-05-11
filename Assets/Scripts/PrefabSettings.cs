@@ -45,7 +45,7 @@ public class PrefabSettings : MonoBehaviour
     void FallingPlatform(Vector3 examplePlayerPos, Vector3 examplePrefabPos)
     {
         Rigidbody prefabRb = prefab.GetComponent<Rigidbody>();
-        if (examplePlayerPos.y > examplePrefabPos.y+5)
+        if (examplePlayerPos.y > examplePrefabPos.y+8)
         {
             prefabRb.isKinematic = false;
         }

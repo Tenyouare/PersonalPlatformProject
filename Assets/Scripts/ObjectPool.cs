@@ -14,6 +14,8 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] GameObject prefab;
     [SerializeField] Vector3 platformVector;
     [SerializeField] Vector3 startPos;
+    [SerializeField] float firstHeight;
+    [SerializeField] float xValue = 15f;
 
     [Header("Other Settings")]
 
@@ -24,8 +26,8 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             var obj = Instantiate(prefab);
-            platformVector = new Vector3(0, 9, 0);
-            
+            platformVector = RandomPositionGenerate();
+
             obj.SetActive(false);
             pooledObjects.Add(obj);
         }
@@ -41,6 +43,7 @@ public class ObjectPool : MonoBehaviour
             {
 
                 obj.transform.position = PrefHeight();
+                obj.transform.localScale = ObjectScaler();
                 obj.SetActive(true);
                 return obj;
 
@@ -60,7 +63,9 @@ public class ObjectPool : MonoBehaviour
         {
             if (obj.activeInHierarchy)
             {
-                platformVector += new Vector3(0, 3, 0);
+                platformVector += RandomPositionGenerate();
+                platformVector.x = Random.Range(-xValue, xValue);
+
                 return platformVector;
             }
 
@@ -68,11 +73,22 @@ public class ObjectPool : MonoBehaviour
         return platformVector;
     }
 
+    Vector3 ObjectScaler()
+    {
+        Transform objTransform = transform;
+
+        Vector3 scale = objTransform.localScale;
+
+        scale.x = Random.Range(5, 10);
+        objTransform.localScale = scale;
+        return objTransform.localScale;
+    }
+
     public GameObject ReturnObjectToPool()
     {
-        foreach(var obj in pooledObjects)
+        foreach (var obj in pooledObjects)
         {
-            if(player.transform.position.y > obj.transform.position.y + 10)
+            if (player.transform.position.y > obj.transform.position.y + 15)
             {
                 obj.SetActive(false);
                 return obj;
@@ -81,6 +97,12 @@ public class ObjectPool : MonoBehaviour
         return null;
     }
 
-
+    Vector3 RandomPositionGenerate()
+    {
+        firstHeight = 4f;
+        var randomXVector = Random.Range(-xValue, xValue);
+        Vector3 firstVector = new Vector3(randomXVector, firstHeight, 0);
+        return firstVector;
+    }
 
 }
