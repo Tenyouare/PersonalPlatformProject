@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] GameObject player;
     float horizontalInput;
-    public List<GameObject> platforms = new List<GameObject>();
+
 
     private Vector3 playerPos;
     private Vector3 leftPlayerBound;
@@ -17,7 +17,7 @@ public class CharacterMovement : MonoBehaviour
 
     Rigidbody playerRb;
 
-    [SerializeField] float speed = 2f;
+    [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 10f;
     [SerializeField] private bool isOnGround = true;
 
