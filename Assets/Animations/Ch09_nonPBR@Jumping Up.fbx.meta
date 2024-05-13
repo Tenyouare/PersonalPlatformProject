@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: 54b2672701edc094183a92c596e45e17
+guid: ab2156ed975a2a541a5ba37f0c08fff2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ch09_body
-    second: {fileID: 2100000, guid: a6f31f24bb70d0b4a8e324c8beb5796c, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch09_1001_Diffuse
-    second: {fileID: 2800000, guid: a09be36698bc8a548b2701243f74eba2, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch09_1001_Glossiness
-    second: {fileID: 2800000, guid: d30f87dc0ab79f44798a994bdde54e5f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch09_1001_Normal
-    second: {fileID: 2800000, guid: fdb6f5a059199aa4db2343c2c87333e1, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch09_1001_Specular
-    second: {fileID: 2800000, guid: 6ea2c063823b35c459e51ba740430120, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -102,11 +77,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 67869853e5820a84b9ff8daace923ac7
-  - 702667e25a9f4f14882abfc6f24afc4c
-  - c3871a4edb115ad4dad609e17dadfd9c
-  - ab2156ed975a2a541a5ba37f0c08fff2
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -875,11 +846,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 54b2672701edc094183a92c596e45e17, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
