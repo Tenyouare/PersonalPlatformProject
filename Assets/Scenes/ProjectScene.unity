@@ -589,7 +589,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 54b2672701edc094183a92c596e45e17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2065984717}
   m_SourcePrefab: {fileID: 100100000, guid: 54b2672701edc094183a92c596e45e17, type: 3}
 --- !u!1001 &1067833058
 PrefabInstance:
@@ -834,6 +837,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 54b2672701edc094183a92c596e45e17, type: 3}
   m_PrefabInstance: {fileID: 974342227}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065984717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065984714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3dd2cb1812910641945da0cc97dfac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMovementScript: {fileID: 0}
 --- !u!1 &2145107469
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,8 +977,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145107469}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.461, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -983,6 +999,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2145107469}
   asset: {fileID: 2065984714}
+  horizontalInput: 0
+  playerPos: {x: 0, y: 0, z: 0}
+  playerRb: {fileID: 0}
   speed: 10
   jumpForce: 16
   isOnGround: 0

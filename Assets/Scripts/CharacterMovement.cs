@@ -8,20 +8,20 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] GameObject player;
     [SerializeField] GameObject asset;
-    float horizontalInput;
+    public float horizontalInput;
 
 
-    private Vector3 playerPos;
+    public Vector3 playerPos;
     private Vector3 leftPlayerBound;
     private Vector3 rightPlayerBound;
     private float playerBoundX = 16.4f;
 
-    private Rigidbody playerRb;
+    public Rigidbody playerRb;
 
     private float gravityModifier = 2.5f;
     [SerializeField] float speed = 10f;
     [SerializeField] float jumpForce = 20f;
-    [SerializeField] private bool isOnGround = true;
+    public bool isOnGround = true;
 
 
     void Start()
