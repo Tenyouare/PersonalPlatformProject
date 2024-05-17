@@ -15,24 +15,31 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 rightPlayerBound;
     private float playerBoundX = 16.4f;
 
-    Rigidbody playerRb;
+    private Rigidbody playerRb;
 
-    [SerializeField] float speed = 5f;
-    [SerializeField] float jumpForce = 10f;
+    private float gravityModifier = 2.5f;
+    [SerializeField] float speed = 10f;
+    [SerializeField] float jumpForce = 20f;
     [SerializeField] private bool isOnGround = true;
 
-    // Start is called before the first frame update
+
     void Start()
     {
+        Physics.gravity *= gravityModifier;
         playerRb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-
+        
         horizontalInput = Input.GetAxis("Horizontal");
-        playerRb.AddForce(Vector3.right * speed * horizontalInput);
+
+        //move by adding velocity
+        playerRb.velocity = new Vector3 (horizontalInput * speed, playerRb.velocity.y, playerRb.velocity.z);
+
+        //move by adding force
+        //playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
         PlayerJumpCheck();
         PlayerTeleport();
@@ -42,7 +49,11 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //jump by adding velocity 
+            playerRb.velocity = new Vector3(playerRb.velocity.x, jumpForce, playerRb.velocity.z);
+            
+            // jump by adding force
+            //playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
     }
@@ -79,5 +90,4 @@ public class CharacterMovement : MonoBehaviour
             player.transform.position = leftPlayerBound;
         }
     }
-
 }
