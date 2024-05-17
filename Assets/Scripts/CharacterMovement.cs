@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] GameObject player;
+    [SerializeField] GameObject asset;
     float horizontalInput;
 
 
@@ -31,8 +32,7 @@ public class CharacterMovement : MonoBehaviour
 
 
     void Update()
-    {
-        
+    { 
         horizontalInput = Input.GetAxis("Horizontal");
 
         //move by adding velocity
@@ -43,6 +43,7 @@ public class CharacterMovement : MonoBehaviour
 
         PlayerJumpCheck();
         PlayerTeleport();
+        RotateAsset();
     }
 
     void PlayerJumpCheck()
@@ -89,5 +90,26 @@ public class CharacterMovement : MonoBehaviour
         {
             player.transform.position = leftPlayerBound;
         }
+    }
+
+    void RotateAsset()
+    {
+        Quaternion currentRotation = asset.transform.rotation;
+        if (VelocityCatcher(horizontalInput) > 0)
+        {
+            Quaternion rotation = Quaternion.Euler(0, 90, 0);
+            asset.transform.rotation = rotation;
+        }
+        else if(VelocityCatcher(horizontalInput)<0)
+        {
+            Quaternion rotation = Quaternion.Euler(0,270, 0);
+            asset.transform.rotation = rotation;
+        }
+    }
+
+    float VelocityCatcher(float velocity)
+    {
+        float velocityCatcher = velocity;
+        return velocityCatcher;
     }
 }
