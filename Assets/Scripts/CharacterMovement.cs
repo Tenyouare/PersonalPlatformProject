@@ -5,38 +5,43 @@ using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [Header("Main Objects")]
     [SerializeField] GameObject player;
     [SerializeField] GameObject asset;
     public float horizontalInput;
+    public Rigidbody playerRb;
 
-
+    [Header("Player Properties")]
     public Vector3 playerPos;
     private Vector3 leftPlayerBound;
     private Vector3 rightPlayerBound;
     private float playerBoundX = 16.4f;
-
-    public Rigidbody playerRb;
-
-    private float gravityModifier = 2.5f;
     [SerializeField] float speed = 10f;
-    [SerializeField] float jumpForce = 20f;
+    
+    [Header("Jump && Physics")]
+    [SerializeField] float jumpForce = 16f;
+    [SerializeField] Vector3 jumpVelocity;
+    [SerializeField] Vector3 doubleJumpVelocity;
+    [SerializeField] float gravityModifier = 2.5f;
     public bool isOnGround = true;
-
+    public bool isJumpPressed = false;
+    
 
     void Start()
     {
         Physics.gravity *= gravityModifier;
         playerRb = GetComponent<Rigidbody>();
+        jumpVelocity = new Vector3(playerRb.velocity.x, jumpForce, playerRb.velocity.z);
+        doubleJumpVelocity = new Vector3(playerRb.velocity.x, jumpForce/1.25f, playerRb.velocity.z);
     }
 
 
     void Update()
-    { 
+    {
         horizontalInput = Input.GetAxis("Horizontal");
 
         //move by adding velocity
-        playerRb.velocity = new Vector3 (horizontalInput * speed, playerRb.velocity.y, playerRb.velocity.z);
+        playerRb.velocity = new Vector3(horizontalInput * speed, playerRb.velocity.y, playerRb.velocity.z);
 
         //move by adding force
         //playerRb.AddForce(Vector3.right * speed * horizontalInput);
@@ -51,11 +56,17 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             //jump by adding velocity 
-            playerRb.velocity = new Vector3(playerRb.velocity.x, jumpForce, playerRb.velocity.z);
-            
+            playerRb.velocity = jumpVelocity;
+
             // jump by adding force
             //playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            isJumpPressed = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && isJumpPressed == true)
+        {
+            playerRb.velocity = doubleJumpVelocity;
+            isJumpPressed = false;
         }
     }
 
@@ -100,9 +111,9 @@ public class CharacterMovement : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0, 90, 0);
             asset.transform.rotation = rotation;
         }
-        else if(VelocityCatcher(horizontalInput)<0)
+        else if (VelocityCatcher(horizontalInput) < 0)
         {
-            Quaternion rotation = Quaternion.Euler(0,270, 0);
+            Quaternion rotation = Quaternion.Euler(0, 270, 0);
             asset.transform.rotation = rotation;
         }
     }

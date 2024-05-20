@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject platformPrefab;
     [SerializeField] bool  camLock;
+    public TextMeshProUGUI scoreText;
+    private int scoreHolder = 0;
     private Vector3 camOffset;
 
     [SerializeField] GameObject player;
 
-
+    private int score = 0;
     private Vector3 _currentVel = Vector3.zero;
     [SerializeField] float smoothTime = 0.25f;
 
@@ -23,6 +27,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player");
 
         camOffset = new Vector3(0, 0.25f, -15f);
+        scoreText.text = "Score : " + score;
 
     }
 
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
         { 
             Debug.Log("true"); 
         }
+        ScoreCalculator();
 
     }
 
@@ -47,6 +53,7 @@ public class GameManager : MonoBehaviour
             mainCamera.transform.Translate(Vector3.up * 0.5f * Time.deltaTime);
         }
         CameraSetting();
+        
     }
 
     void CameraSetting()
@@ -71,6 +78,24 @@ public class GameManager : MonoBehaviour
             camLock = false;
         }
 
+    }
+
+    void ScoreCalculator()
+    {
+        Vector3 instantPlayerPos = player.transform.position;
+        score = Mathf.RoundToInt(instantPlayerPos.y / 4);
+        
+        if (scoreHolder + 1 == score ) 
+        {
+            scoreText.text = "Score : " + score.ToString();
+            scoreHolder++;
+            Debug.Log(scoreHolder); 
+        }
+
+        /*if(score > scoreHolder)
+        {
+            scoreText.text = "Score : " + score.ToString();
+        }*/
     }
 
 }
