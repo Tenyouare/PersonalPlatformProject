@@ -26,6 +26,11 @@ public class AnimationManager : MonoBehaviour
         inputHolder = characterMovementScript.horizontalInput;
         velocityHolder = characterMovementScript.playerRb.velocity;
         AnimationGenerator();
+        //PositionEqualizer();
+    }
+
+    private void LateUpdate()
+    {
         PositionEqualizer();
     }
 
@@ -64,7 +69,9 @@ public class AnimationManager : MonoBehaviour
 
     void PositionEqualizer()
     {
-        assetPos = transform.position; 
+        assetPos = transform.position;
+        assetPos.x = characterMovementScript.playerPos.x;
         assetPos.y = characterMovementScript.playerPos.y + offset.y;
+        assetPos.z = characterMovementScript.playerPos.z;
     }
 }

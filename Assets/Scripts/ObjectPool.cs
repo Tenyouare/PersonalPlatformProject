@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -15,7 +16,8 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] Vector3 platformVector;
     [SerializeField] Vector3 startPos;
     [SerializeField] float firstHeight;
-    [SerializeField] float xValue = 15f;
+    [SerializeField] float zPos = -1f;
+    [SerializeField] float xValue = 13f;
 
     [Header("Other Settings")]
 
@@ -65,6 +67,10 @@ public class ObjectPool : MonoBehaviour
             {
                 platformVector += RandomPositionGenerate();
                 platformVector.x = Random.Range(-xValue, xValue);
+                platformVector.z = zPos;
+                /*Quaternion currentRotation = obj.transform.rotation;
+                Quaternion rotation = Quaternion.Euler(0, 0, 0);
+                obj.transform.rotation = rotation;*/
 
                 return platformVector;
             }
@@ -79,7 +85,7 @@ public class ObjectPool : MonoBehaviour
 
         Vector3 scale = objTransform.localScale;
 
-        scale.x = Random.Range(5, 10);
+        scale.x = Random.Range(2, 5);
         objTransform.localScale = scale;
         return objTransform.localScale;
     }
@@ -101,7 +107,7 @@ public class ObjectPool : MonoBehaviour
     {
         firstHeight = 4f;
         var randomXVector = Random.Range(-xValue, xValue);
-        Vector3 firstVector = new Vector3(randomXVector, firstHeight, 0);
+        Vector3 firstVector = new Vector3(randomXVector, firstHeight, -1);
         return firstVector;
     }
 

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public bool gameOver;
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject platformPrefab;
     [SerializeField] bool  camLock;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        gameOver = false;
         mainCamera = Camera.main;
         player = GameObject.Find("Player");
 

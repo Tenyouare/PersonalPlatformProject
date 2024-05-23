@@ -30,14 +30,23 @@ public class PrefabSettings : MonoBehaviour
 
     void YPosCheck()
     {
-        if (prefabPos.y > playerPos.y + 1f)
-        {
-            prefabBoxCol.isTrigger = true;
-        }
-        else if (prefabPos.y +0.99f < playerPos.y)
+        if (prefabPos.y + 1f < playerPos.y)
         {
             prefabBoxCol.isTrigger = false;
         }
+        else
+        {
+            prefabBoxCol.isTrigger = true;
+        }
+
+        /*if (prefabPos.y > playerPos.y)
+        {
+            prefabBoxCol.isTrigger = true;
+        }
+        else if (prefabPos.y < playerPos.y)
+        {
+            prefabBoxCol.isTrigger = false;
+        }*/
     }
 
 

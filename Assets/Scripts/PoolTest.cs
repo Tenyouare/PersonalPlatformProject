@@ -7,9 +7,12 @@ public class PoolTest : MonoBehaviour
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private float spawnInterval = 1f;
     [SerializeField] private float returnInterval = 1f;
+    [SerializeField] GameManager gameManagerScript;
     // Start is called before the first frame update
     void Start()
     {
+        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         StartCoroutine(nameof(SpawnRoutine));
         StartCoroutine(nameof(ReturnObject));
     }
@@ -17,7 +20,7 @@ public class PoolTest : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        while (true)
+        while (gameManagerScript.gameOver == false)
         {
             var obj = objectPool.GetObjectFromPool();
 
@@ -28,7 +31,7 @@ public class PoolTest : MonoBehaviour
 
     private IEnumerator ReturnObject()
     {
-        while (true)
+        while (gameManagerScript.gameOver == false)
         {
             var obj = objectPool.ReturnObjectToPool();
             yield return new WaitForSeconds(returnInterval);
