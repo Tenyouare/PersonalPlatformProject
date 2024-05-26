@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
 
     [Header("Player Properties")]
     public Vector3 playerPos;
+    public Vector3 firstPlayerPos;
     private Vector3 leftPlayerBound;
     private Vector3 rightPlayerBound;
     private float playerBoundX = 16.4f;
@@ -29,7 +30,9 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        ResetGravity();
         Physics.gravity *= gravityModifier;
+        FirstPos();
         playerRb = GetComponent<Rigidbody>();
         jumpVelocity = new Vector3(playerRb.velocity.x, jumpForce, playerRb.velocity.z);
         doubleJumpVelocity = new Vector3(playerRb.velocity.x, jumpForce/1.25f, playerRb.velocity.z);
@@ -122,5 +125,16 @@ public class CharacterMovement : MonoBehaviour
     {
         float velocityCatcher = velocity;
         return velocityCatcher;
+    }
+
+    void FirstPos()
+    {
+        firstPlayerPos  = Vector3.zero;
+        transform.position = firstPlayerPos;
+    }
+
+    void ResetGravity()
+    {
+        Physics.gravity = new Vector3(0, -9.81f, 0);
     }
 }

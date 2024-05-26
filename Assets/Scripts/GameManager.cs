@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject platformPrefab;
     [SerializeField] bool  camLock;
+    [SerializeField] GameObject panel;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI deathScoreText;
     private int scoreHolder = 0;
     private Vector3 camOffset;
 
@@ -45,12 +47,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("true"); 
         }
         ScoreCalculator();
+        OpenRestartPanel();
 
     }
 
     private void LateUpdate()
     {
-        if (camLock == false)
+        if (camLock == false && gameOver == false)
         {
             mainCamera.transform.Translate(Vector3.up * 0.5f * Time.deltaTime);
         }
@@ -99,5 +102,16 @@ public class GameManager : MonoBehaviour
             scoreText.text = "Score : " + score.ToString();
         }*/
     }
+
+    void OpenRestartPanel()
+    {
+        if (gameOver == true)
+        {
+            panel.SetActive(true);
+            deathScoreText.text = scoreText.text;
+            scoreText.gameObject.SetActive(false);
+        }
+    }
+
 
 }
